@@ -1,0 +1,37 @@
+type Query {
+  info: String!
+  scripts: [Script!]!
+  users: [User!]!
+  me: User!
+  createdBy: User!
+}
+
+type Mutation {
+  createScript(name: String!, description: String!): Script!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Subscription {
+  newScript: Script
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  scripts: [Script!]!
+}
+
+type Script {
+  id: ID!
+  name: String!
+  description: String!
+  createdBy: User
+  createdById: Int!
+}
